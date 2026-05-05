@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Premium Tech</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Background Elements for Glassmorphism -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <header class="glass-nav">
+        <div class="container nav-container">
+            <a href="#" class="logo">Nex<span class="highlight">us</span></a>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#products">Shop</a>
+                <a href="#about">About</a>
+            </nav>
+            <div class="nav-icons">
+                <button class="icon-btn cart-btn" id="cartBtn">
+                    <i class='bx bx-shopping-bag'></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Experience <br>The <span class="text-gradient">Future</span> <br>Of Tech.</h1>
+                    <p class="hero-subtitle">Discover premium gadgets designed to elevate your everyday life. Uncompromising quality meets sleek aesthetics.</p>
+                    <a href="#products" class="btn btn-primary">Explore Collection</a>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&q=80" alt="Premium Controller" class="hero-img floating">
+                    <div class="glass-card hero-stats">
+                        <i class='bx bx-check-shield'></i>
+                        <div>
+                            <h4>2 Year</h4>
+                            <p>Premium Warranty</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured <span class="text-gradient">Products</span></h2>
+                    <div class="filter-buttons" id="filterButtons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="Audio">Audio</button>
+                        <button class="filter-btn" data-filter="Wearables">Wearables</button>
+                        <button class="filter-btn" data-filter="Accessories">Accessories</button>
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer glass-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">Nex<span class="highlight">us</span></a>
+                <p>Elevating your digital lifestyle with premium technology.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#">Shop</a>
+                <a href="#">About Us</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-youtube'></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Nexus Tech. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar (Hidden by default) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCartBtn"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Cart items will be injected here by JS -->
+            <div class="empty-cart-msg" id="emptyCartMsg">
+                <i class='bx bx-shopping-bag'></i>
+                <p>Your cart is empty.</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalValue">$0.00</span>
+            </div>
+            <button class="btn btn-primary w-100 checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Product added to cart!</div>
+
+    <script src="products.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
