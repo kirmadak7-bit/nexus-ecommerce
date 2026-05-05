@@ -2,10 +2,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     // State
     let cart = JSON.parse(localStorage.getItem('nexus_cart')) || [];
+    let currentCategory = 'all';
     
     // DOM Elements
     const productsGrid = document.getElementById('productsGrid');
     const filterButtons = document.getElementById('filterButtons');
+    const searchInput = document.getElementById('searchInput');
     const cartBtn = document.getElementById('cartBtn');
     const cartBadge = document.getElementById('cartBadge');
     const cartOverlay = document.getElementById('cartOverlay');
@@ -23,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
     const checkoutForm = document.getElementById('checkoutForm');
 
+    // Policy Modals
+    const policyLinks = document.querySelectorAll('.policy-link');
+    const policyOverlay = document.getElementById('policyOverlay');
+    const closePolicyBtns = document.querySelectorAll('.close-policy');
+
     const WHATSAPP_NUMBER = "917905957827";
 
     // Initialize
@@ -33,19 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if(filterButtons) {
         filterButtons.addEventListener('click', (e) => {
             if (e.target.classList.contains('filter-btn')) {
-                // Update active state
                 document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
-                
-                // Filter products
-                const filterValue = e.target.getAttribute('data-filter');
-                if (filterValue === 'all') {
-                    renderProducts(products);
-                } else {
-                    const filteredProducts = products.filter(p => p.category === filterValue);
-                    renderProducts(filteredProducts);
-                }
+                currentCategory = e.target.getAttribute('data-filter');
+                filterAndRender();
             }
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            filterAndRender();
         });
     }
 
@@ -104,11 +109,53 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast("Order sent via WhatsApp!");
     });
 
+    // Policy Modal Listeners
+    policyLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = link.getAttribute('data-modal');
+            document.getElementById(modalId).classList.add('active');
+            policyOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    closePolicyBtns.forEach(btn => {
+        btn.addEventListener('click', closePolicies);
+    });
+    if(policyOverlay) policyOverlay.addEventListener('click', closePolicies);
+
+    function closePolicies() {
+        document.querySelectorAll('.policy-modal').forEach(m => m.classList.remove('active'));
+        policyOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
     // Functions
+    function filterAndRender() {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        let filteredProducts = products;
+
+        if (currentCategory !== 'all') {
+            filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
+        }
+
+        if (searchTerm) {
+            filteredProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(searchTerm) || p.description.toLowerCase().includes(searchTerm));
+        }
+
+        renderProducts(filteredProducts);
+    }
+
     function renderProducts(productsToRender) {
         if (!productsGrid) return;
         productsGrid.innerHTML = '';
         
+        if (productsToRender.length === 0) {
+            productsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted);">No products found.</p>`;
+            return;
+        }
+
         productsToRender.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
