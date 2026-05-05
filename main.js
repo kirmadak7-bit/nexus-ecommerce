@@ -15,6 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const emptyCartMsg = document.getElementById('emptyCartMsg');
     const cartTotalValue = document.getElementById('cartTotalValue');
     const toast = document.getElementById('toast');
+    
+    // Checkout Elements
+    const proceedToCheckoutBtn = document.getElementById('proceedToCheckoutBtn');
+    const checkoutOverlay = document.getElementById('checkoutOverlay');
+    const checkoutModal = document.getElementById('checkoutModal');
+    const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
+    const checkoutForm = document.getElementById('checkoutForm');
+
+    const WHATSAPP_NUMBER = "917905957827";
 
     // Initialize
     renderProducts(products);
@@ -43,6 +52,57 @@ document.addEventListener('DOMContentLoaded', () => {
     cartBtn.addEventListener('click', toggleCart);
     closeCartBtn.addEventListener('click', toggleCart);
     cartOverlay.addEventListener('click', toggleCart);
+
+    proceedToCheckoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            showToast("Your cart is empty!");
+            return;
+        }
+        toggleCart(); // close cart
+        openCheckout();
+    });
+
+    closeCheckoutBtn.addEventListener('click', closeCheckout);
+    checkoutOverlay.addEventListener('click', closeCheckout);
+
+    checkoutForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('cName').value;
+        const phone = document.getElementById('cPhone').value;
+        const address = document.getElementById('cAddress').value;
+
+        let message = `🛍️ *New Order from Nexus Store* 🛍️\n\n`;
+        message += `👤 *Customer Details:*\n`;
+        message += `Name: ${name}\n`;
+        message += `Phone: ${phone}\n`;
+        message += `Address: ${address}\n\n`;
+        
+        message += `🛒 *Order Details:*\n`;
+        let total = 0;
+        cart.forEach(item => {
+            message += `${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}\n`;
+            total += item.price * item.quantity;
+        });
+        
+        message += `\n💰 *Total Bill:* $${total.toFixed(2)}\n\n`;
+        message += `Please confirm my order!`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+        
+        // Open WhatsApp
+        window.open(whatsappUrl, '_blank');
+
+        // Clear cart
+        cart = [];
+        saveCart();
+        updateCartUI();
+        closeCheckout();
+        checkoutForm.reset();
+        
+        showToast("Order sent via WhatsApp!");
+    });
 
     // Functions
     function renderProducts(productsToRender) {
@@ -80,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         saveCart();
         updateCartUI();
-        showToast();
+        showToast("Product added to cart!");
     };
 
     window.updateQuantity = function(productId, change) {
@@ -160,7 +220,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function showToast() {
+    function openCheckout() {
+        checkoutOverlay.classList.add('active');
+        checkoutModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckout() {
+        checkoutOverlay.classList.remove('active');
+        checkoutModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function showToast(msg = "Product added to cart!") {
+        toast.textContent = msg;
         toast.classList.add('show');
         setTimeout(() => {
             toast.classList.remove('show');
