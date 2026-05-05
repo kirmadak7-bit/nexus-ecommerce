@@ -121,8 +121,32 @@
                 <span>Total:</span>
                 <span id="cartTotalValue">$0.00</span>
             </div>
-            <button class="btn btn-primary w-100 checkout-btn">Proceed to Checkout</button>
+            <button class="btn btn-primary w-100 checkout-btn" id="proceedToCheckoutBtn">Proceed to Checkout</button>
         </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-overlay" id="checkoutOverlay"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-header">
+            <h3>Checkout Details</h3>
+            <button class="close-checkout" id="closeCheckoutBtn"><i class='bx bx-x'></i></button>
+        </div>
+        <form id="checkoutForm" class="checkout-form">
+            <div class="form-group">
+                <label for="cName">Full Name</label>
+                <input type="text" id="cName" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="cPhone">Phone Number</label>
+                <input type="tel" id="cPhone" required placeholder="1234567890">
+            </div>
+            <div class="form-group">
+                <label for="cAddress">Delivery Address</label>
+                <textarea id="cAddress" required placeholder="123 Tech Street, Area..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Order via WhatsApp</button>
+        </form>
     </div>
 
     <!-- Toast Notification -->
