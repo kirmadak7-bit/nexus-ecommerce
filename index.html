@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nexus Premium Tech - Discover and buy the latest premium gadgets, audio equipment, wearables, and accessories.">
+    <meta name="keywords" content="premium tech, gadgets, headphones, smartwatch, nexus tech, buy electronics">
+    <meta name="author" content="Nexus Tech">
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="Nexus | Premium Tech">
+    <meta property="og:description" content="Elevating your digital lifestyle with premium technology.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&q=80">
+    <meta property="og:url" content="https://nexus-ecommerce.netlify.app/">
+    
     <title>Nexus | Premium Tech</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +32,7 @@
             <nav class="nav-links">
                 <a href="#home" class="active">Home</a>
                 <a href="#products">Shop</a>
-                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </nav>
             <div class="nav-icons">
                 <button class="icon-btn cart-btn" id="cartBtn">
@@ -59,8 +68,14 @@
         <!-- Products Section -->
         <section id="products" class="products-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" style="flex-wrap: wrap;">
                     <h2 class="section-title">Featured <span class="text-gradient">Products</span></h2>
+                    
+                    <div class="search-container">
+                        <i class='bx bx-search'></i>
+                        <input type="text" id="searchInput" placeholder="Search products..." class="search-input">
+                    </div>
+
                     <div class="filter-buttons" id="filterButtons">
                         <button class="filter-btn active" data-filter="all">All</button>
                         <button class="filter-btn" data-filter="Audio">Audio</button>
@@ -74,6 +89,54 @@
                 </div>
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title text-center" style="margin-bottom: 3rem;">Get In <span class="text-gradient">Touch</span></h2>
+                <div class="contact-container glass-card">
+                    <div class="contact-info">
+                        <h3>Our Store</h3>
+                        <p>Visit us to experience our premium tech collection in person.</p>
+                        
+                        <div class="info-item">
+                            <i class='bx bx-map'></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>123 Innovation Avenue, Tech District, NY 10001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class='bx bx-phone'></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 7905957827</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class='bx bx-envelope'></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>support@nexustech.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class='bx bx-time-five'></i>
+                            <div>
+                                <h4>Store Hours</h4>
+                                <p>Mon-Sat: 10:00 AM - 8:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6175440842217!2d-73.98782352426388!3d40.74844453538466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer glass-footer">
@@ -83,10 +146,10 @@
                 <p>Elevating your digital lifestyle with premium technology.</p>
             </div>
             <div class="footer-links">
-                <h4>Quick Links</h4>
-                <a href="#">Shop</a>
-                <a href="#">About Us</a>
-                <a href="#">Support</a>
+                <h4>Legal Info</h4>
+                <a href="#" class="policy-link" data-modal="privacyModal">Privacy Policy</a>
+                <a href="#" class="policy-link" data-modal="termsModal">Terms & Conditions</a>
+                <a href="#" class="policy-link" data-modal="returnModal">Return Policy</a>
             </div>
             <div class="footer-social">
                 <h4>Follow Us</h4>
@@ -102,7 +165,7 @@
         </div>
     </footer>
 
-    <!-- Shopping Cart Sidebar (Hidden by default) -->
+    <!-- Shopping Cart Sidebar -->
     <div class="cart-overlay" id="cartOverlay"></div>
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
@@ -148,6 +211,50 @@
             <button type="submit" class="btn btn-primary w-100">Send Order via WhatsApp</button>
         </form>
     </div>
+
+    <!-- Policy Modals -->
+    <div class="policy-overlay" id="policyOverlay"></div>
+    
+    <div class="policy-modal" id="privacyModal">
+        <div class="policy-header">
+            <h3>Privacy Policy</h3>
+            <button class="close-policy"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="policy-content">
+            <p><strong>Last Updated: May 2026</strong></p>
+            <p>Your privacy is important to us. Nexus Tech respects your privacy regarding any information we may collect from you across our website. We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent.</p>
+            <p>We do not share any personally identifying information publicly or with third-parties, except when required to by law.</p>
+        </div>
+    </div>
+
+    <div class="policy-modal" id="termsModal">
+        <div class="policy-header">
+            <h3>Terms & Conditions</h3>
+            <button class="close-policy"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="policy-content">
+            <p><strong>1. Acceptance of Terms</strong><br>By accessing this website, you are agreeing to be bound by these website Terms and Conditions of Use.</p>
+            <p><strong>2. Disclaimer</strong><br>The materials on Nexus Tech's website are provided on an 'as is' basis. Nexus Tech makes no warranties, expressed or implied.</p>
+            <p><strong>3. Limitations</strong><br>In no event shall Nexus Tech or its suppliers be liable for any damages arising out of the use or inability to use the materials on the website.</p>
+        </div>
+    </div>
+
+    <div class="policy-modal" id="returnModal">
+        <div class="policy-header">
+            <h3>Return Policy</h3>
+            <button class="close-policy"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="policy-content">
+            <p><strong>7-Day Easy Returns</strong></p>
+            <p>We accept returns within 7 days of delivery for all undamaged and unused products. Items must be in their original packaging.</p>
+            <p><strong>How to Return:</strong><br>Simply contact our support team via WhatsApp or Email with your order details to initiate a return. Refunds are processed within 5-7 business days after we receive the item.</p>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/917905957827" target="_blank" class="floating-whatsapp">
+        <i class='bx bxl-whatsapp'></i>
+    </a>
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">Product added to cart!</div>
